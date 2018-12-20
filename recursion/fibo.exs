@@ -1,22 +1,21 @@
 # フィボナッチ
 
 defmodule Fibo do
-	# 非対応時の処理
-	def exec(n, _map \\ %{}) when n < 0, do: 0
-
 	# フィボナッチの処理
-	def exec(0, _map), do: 0
-	def exec(1, _map), do: 1
-
-	def exec(n, _map \\ %{}) do
-		if Map.has_key?(_map, n) == false do
-			ans = exec(n-2, _map) + exec(n-1, _map)
-			_map = %{_map | n=>ans}
+	def exec(0, memo), do: {0,memo}
+	def exec(1, memo), do: {1,memo}
+	def exec(n, memo \\ %{}) do
+		if Map.has_key?(memo, n) == false do
+			a = exec(n-2, memo)
+			{_,memo} = a
+			b = exec(n-1, memo)
+			{_,memo} = b
+			{elem(a,0)+elem(b,0), memo}
 		else
-			%{^n=>ans} = _map
+			{memo.fetch(n), memo}
 		end
-		ans
 	end
+
 end
 
 # Elixirでは無名関数を使った再帰呼び出しはできない。現状はモジュール内で対応する。
@@ -31,8 +30,9 @@ end
 # 	f.(n)
 # end
 
-IO.puts(Fibo.exec(0))
-# IO.puts(fibo.(1))
-# IO.puts(fibo.(2))
-# IO.puts(fibo.(3))
-# IO.puts(fibo.(4))
+n = [0,1,2,3,4,5,6,7,8,9,10,20,30,40,50]
+memo = %{}
+for i <- n  do
+	{ans, memo} = Fibo.exec(i, memo)
+	IO.puts( ans )
+end
