@@ -7,10 +7,12 @@ defmodule Fibo do
 	def exec(n, memo \\ %{}) do
 		if Map.has_key?(memo, n) == false do
 			a = exec(n-2, memo)
-			{_,memo} = a
+			{v0, memo} = a
 			b = exec(n-1, memo)
-			{_,memo} = b
-			{elem(a,0)+elem(b,0), memo}
+			{v1, memo} = b
+			val = v0 + v1
+			Map.put(memo, n, val)
+			{val, memo}
 		else
 			{memo.fetch(n), memo}
 		end
