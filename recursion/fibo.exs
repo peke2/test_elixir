@@ -11,10 +11,10 @@ defmodule Fibo do
 			b = exec(n-1, memo)
 			{v1, memo} = b
 			val = v0 + v1
-			Map.put(memo, n, val)
+			memo = Map.put(memo, n, val)
 			{val, memo}
 		else
-			{memo.fetch(n), memo}
+			{memo[n], memo}
 		end
 	end
 
@@ -33,8 +33,12 @@ end
 # end
 
 n = [0,1,2,3,4,5,6,7,8,9,10,20,30,40,50]
+# n = [0,1,2,3,4,5,6]
 memo = %{}
 for i <- n  do
+	# 常にforの前にあるmemoが参照されているようで、サイズは「0」のまま
+	IO.puts( "memo size=#{map_size(memo)}" )
+	# 関数の戻り値からmemoを取り出して次の呼び出しに使っているつもりだが、for文で参照されるものは最初に定義されているmemo(サイズ0)
 	{ans, memo} = Fibo.exec(i, memo)
 	IO.puts( ans )
 end
