@@ -22,5 +22,7 @@ defmodule Knapsack do
   end
 end
 
+
+
 knaps = [%{w: 1,v: 2},%{w: 3,v: 1},%{w: 2,v: 3}]
 IO.puts Knapsack.proc(knaps, 3, 0)
