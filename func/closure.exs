@@ -17,6 +17,7 @@ IO.puts(add.())   # 8
 
 # でも、これはできない(言語的な仕様らしい？)
 # https://stackoverflow.com/questions/21982713/recursion-and-anonymous-functions-in-elixir
+# Erlang/OTP 22、Elixir 1.9.1 でもできていない(2019.09.14)
 # sum = fn
 #   0 -> 0
 #   n -> n + sum.(n-1)
