@@ -13,6 +13,10 @@ defmodule Pseudo do
 
 end
 
+a = [1,2,3,4,5,6,7,8,9,10]
 
-IO.puts(List.foldl([1,2,3,4,5,6,7,8,9,10], 0, fn a,b -> a+b end))
-IO.puts(Pseudo.foldl([1,2,3,4,5,6,7,8,9,10], 0, fn a,b -> a+b end))
+IO.puts(List.foldl(a, 0, fn a,b -> a+b end))
+IO.puts(Pseudo.foldl(a, 0, fn a,b -> a+b end))
+
+# そもそも、リストの要素を合計するそのものがあった
+IO.puts(Enum.sum(a))
