@@ -1,3 +1,5 @@
 .DS_Store
 *.bak
-temp.txt
+.vscode
+temp*.txt
+result*.txt
