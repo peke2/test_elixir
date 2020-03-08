@@ -8,10 +8,16 @@ IO.inspect(l)
 
 #6,12,18,24,30
 mul3 = fn x->x*3 end
-
 l = Stream.iterate(1, &(&1+1))
 |>Stream.map(mul3)
 |>Stream.reject(&( (&1 &&& 1) == 1))
 |>Enum.take(5)
 IO.inspect(l)
 
+add = fn t->elem(t,0)+elem(t,1) end
+n = 3
+l = Stream.iterate(1, &(&1+1))
+|> Stream.map(&({&1, n}))
+|> Stream.map(add)
+|> Enum.take(6)
+IO.inspect(l)
