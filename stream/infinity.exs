@@ -14,7 +14,8 @@ l = Stream.iterate(1, &(&1+1))
 |>Enum.take(5)
 IO.inspect(l)
 
-add = fn t->elem(t,0)+elem(t,1) end
+# add = fn t->elem(t,0)+elem(t,1) end
+add = fn {a,b}->a+b end # タプルで引数を受け取る場合、引数をタプルで表記すると記述と参照が簡単になる！
 n = 3
 l = Stream.iterate(1, &(&1+1))
 |> Stream.map(&({&1, n}))
